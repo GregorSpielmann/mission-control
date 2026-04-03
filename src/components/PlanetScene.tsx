@@ -27,47 +27,36 @@ export default function PlanetScene() {
       {/* Cockpit window vignette */}
       <div className="cockpit-window" />
 
-      {/* Planet group — atmosphere + orbital ring + body all centered here */}
+      {/* Planet group */}
       <div className="planet-group">
 
-        {/* Outer atmosphere halo (sibling of planet-body so it's not clipped) */}
+        {/* Atmosphere halo — CSS layer outside the image */}
         <div className="planet-atmosphere" />
 
         {/* Orbital ring */}
         <div className="orbital-ring" />
 
-        {/* Planet body */}
-        <div className="planet-body">
+        {/* Planet image — replaces all CSS gradient layers */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/planet3.png"
+          alt="Adasight Prime"
+          className="planet-img"
+          draggable={false}
+        />
 
-          {/* Animated surface / continents */}
-          <div className="planet-surface" />
-
-          {/* Ice caps */}
-          <div className="ice-north" />
-          <div className="ice-south" />
-
-          {/* Day / night terminator */}
-          <div className="planet-terminator" />
-
-          {/* City lights in shadow zone */}
-          <div className="city-lights" />
-
-          {/* Inner atmosphere rim (lit-side glow) */}
-          <div className="atmo-rim" />
-
-          {/* Colony base at ~7 o'clock */}
-          <div className="colony-base">
-            <div className="landing-pad" />
-            <div className="colony-buildings">
-              <div className="building building-left" />
-              <div className="building building-center" />
-              <div className="building building-right" />
-            </div>
-            <div className="blink-light blink-a" ref={el => { if (el) blinkRef.current[0] = el }} />
-            <div className="blink-light blink-b" ref={el => { if (el) blinkRef.current[1] = el }} />
-            <div className="blink-light blink-c" ref={el => { if (el) blinkRef.current[2] = el }} />
-            <div className="colony-label">ADASIGHT OUTPOST ALPHA — SECTOR 7</div>
+        {/* Colony base at ~7 o'clock */}
+        <div className="colony-base">
+          <div className="landing-pad" />
+          <div className="colony-buildings">
+            <div className="building building-left" />
+            <div className="building building-center" />
+            <div className="building building-right" />
           </div>
+          <div className="blink-light blink-a" ref={el => { if (el) blinkRef.current[0] = el }} />
+          <div className="blink-light blink-b" ref={el => { if (el) blinkRef.current[1] = el }} />
+          <div className="blink-light blink-c" ref={el => { if (el) blinkRef.current[2] = el }} />
+          <div className="colony-label">ADASIGHT OUTPOST ALPHA — SECTOR 7</div>
         </div>
       </div>
 
@@ -109,7 +98,7 @@ export default function PlanetScene() {
           z-index: 10;
         }
 
-        /* Anchor for all planet elements */
+        /* Planet group anchor */
         .planet-group {
           position: absolute;
           top: 46%;
@@ -120,148 +109,59 @@ export default function PlanetScene() {
           z-index: 1;
         }
 
-        /* Atmosphere halo — sits outside planet-body so it's not clipped */
-        .planet-atmosphere {
+        /* Planet image — fills the group, black bg blends into space */
+        .planet-img {
           position: absolute;
-          inset: -22px;
-          border-radius: 50%;
-          background: radial-gradient(
-            circle at 36% 32%,
-            rgba(96, 211, 255, 0.06) 30%,
-            transparent 65%
-          );
-          box-shadow:
-            0 0 0 2px rgba(96, 211, 255, 0.16),
-            0 0 0 8px rgba(56, 189, 248, 0.08),
-            0 0 0 20px rgba(56, 189, 248, 0.04),
-            0 0 0 45px rgba(56, 189, 248, 0.015);
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          user-select: none;
           pointer-events: none;
         }
 
-        /* Orbital ring — tilted ellipse via CSS perspective */
+        /* Atmosphere halo */
+        .planet-atmosphere {
+          position: absolute;
+          inset: -18px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at 36% 32%,
+            rgba(56, 160, 255, 0.04) 30%,
+            transparent 65%
+          );
+          box-shadow:
+            0 0 0 2px rgba(96, 200, 255, 0.18),
+            0 0 0 8px rgba(56, 189, 248, 0.09),
+            0 0 0 22px rgba(56, 189, 248, 0.04),
+            0 0 0 48px rgba(56, 189, 248, 0.015);
+          pointer-events: none;
+        }
+
+        /* Orbital ring */
         .orbital-ring {
           position: absolute;
           inset: -44px;
           border-radius: 50%;
-          border: 1px solid rgba(56, 189, 248, 0.2);
+          border: 1px solid rgba(56, 189, 248, 0.22);
           box-shadow:
-            0 0 10px rgba(56, 189, 248, 0.1),
+            0 0 10px rgba(56, 189, 248, 0.12),
             inset 0 0 10px rgba(56, 189, 248, 0.05);
           transform: perspective(480px) rotateX(72deg);
           pointer-events: none;
         }
 
-        /* Planet body */
-        .planet-body {
-          position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          overflow: hidden;
-          background: radial-gradient(
-            circle at 34% 38%,
-            #196090 0%,
-            #163758 28%,
-            #0e2444 54%,
-            #071830 100%
-          );
-          box-shadow:
-            inset -22px -16px 50px rgba(0, 0, 0, 0.65),
-            inset 6px 6px 24px rgba(147, 210, 255, 0.06),
-            0 0 50px rgba(56, 189, 248, 0.18),
-            0 0 100px rgba(56, 189, 248, 0.08);
-        }
-
-        /* Surface layer — wider than planet so it can drift */
-        @keyframes planet-drift {
-          0%   { transform: translateX(0%); }
-          100% { transform: translateX(-16%); }
-        }
-
-        .planet-surface {
-          position: absolute;
-          top: -5%;
-          left: -5%;
-          width: 130%;
-          height: 110%;
-          animation: planet-drift 100s ease-in-out infinite alternate;
-          background:
-            radial-gradient(ellipse 30% 18% at 18% 38%, rgba(38, 118, 75, 0.55) 0%, transparent 65%),
-            radial-gradient(ellipse 22% 30% at 50% 22%, rgba(44, 132, 84, 0.50) 0%, transparent 65%),
-            radial-gradient(ellipse 38% 16% at 80% 50%, rgba(38, 118, 75, 0.50) 0%, transparent 65%),
-            radial-gradient(ellipse 16% 22% at 38% 70%, rgba(38, 118, 75, 0.45) 0%, transparent 65%),
-            radial-gradient(ellipse 14% 10% at 95% 28%, rgba(44, 132, 84, 0.40) 0%, transparent 65%),
-            radial-gradient(ellipse 10% 16% at 10% 72%, rgba(38, 118, 75, 0.35) 0%, transparent 65%);
-        }
-
-        /* Polar ice caps — barely there */
-        .ice-north {
-          position: absolute;
-          top: 2%;
-          left: 28%;
-          width: 44%;
-          height: 9%;
-          border-radius: 50%;
-          background: radial-gradient(ellipse at 50% 85%, rgba(215, 238, 255, 0.22) 0%, transparent 65%);
-        }
-        .ice-south {
-          position: absolute;
-          bottom: 2%;
-          left: 30%;
-          width: 40%;
-          height: 7%;
-          border-radius: 50%;
-          background: radial-gradient(ellipse at 50% 15%, rgba(215, 238, 255, 0.18) 0%, transparent 65%);
-        }
-
-        /* Terminator — day/night divide */
-        .planet-terminator {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            108deg,
-            transparent 36%,
-            rgba(0, 0, 0, 0.16) 50%,
-            rgba(0, 0, 0, 0.62) 100%
-          );
-        }
-
-        /* City lights in shadow zone */
-        .city-lights {
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(circle at 72% 42%, rgba(255, 210, 120, 0.75) 0%, transparent 1.2%),
-            radial-gradient(circle at 76% 51%, rgba(255, 210, 120, 0.65) 0%, transparent 1.0%),
-            radial-gradient(circle at 80% 37%, rgba(255, 190, 80,  0.65) 0%, transparent 0.9%),
-            radial-gradient(circle at 68% 59%, rgba(255, 210, 120, 0.55) 0%, transparent 0.9%),
-            radial-gradient(circle at 84% 56%, rgba(255, 200, 100, 0.55) 0%, transparent 0.8%),
-            radial-gradient(circle at 75% 62%, rgba(255, 190, 80,  0.45) 0%, transparent 0.8%),
-            radial-gradient(circle at 70% 47%, rgba(255, 220, 140, 0.45) 0%, transparent 0.7%);
-        }
-
-        /* Inner rim — lit-side atmosphere highlight */
-        .atmo-rim {
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(
-            circle at 36% 32%,
-            transparent 74%,
-            rgba(96, 195, 255, 0.10) 84%,
-            rgba(96, 195, 255, 0.22) 94%,
-            rgba(96, 195, 255, 0.05) 100%
-          );
-        }
-
         /* Colony base */
         .colony-base {
           position: absolute;
-          bottom: 14%;
-          left: 16%;
+          bottom: 18%;
+          left: 18%;
           transform: translateX(-50%);
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 1px;
+          z-index: 2;
         }
 
         .colony-buildings {
@@ -271,9 +171,9 @@ export default function PlanetScene() {
         }
 
         .building {
-          background: rgba(200, 232, 255, 0.88);
+          background: rgba(200, 232, 255, 0.90);
           border-radius: 1px 1px 0 0;
-          box-shadow: 0 0 4px rgba(150, 210, 255, 0.7);
+          box-shadow: 0 0 5px rgba(150, 210, 255, 0.8);
         }
         .building-left   { width: 4px; height: 7px; }
         .building-center { width: 6px; height: 12px; }
@@ -282,9 +182,9 @@ export default function PlanetScene() {
         .landing-pad {
           width: 22px;
           height: 2px;
-          background: rgba(180, 220, 255, 0.75);
+          background: rgba(180, 220, 255, 0.80);
           border-radius: 1px;
-          box-shadow: 0 0 5px rgba(100, 180, 255, 0.6);
+          box-shadow: 0 0 5px rgba(100, 180, 255, 0.7);
         }
 
         .blink-light {
@@ -302,10 +202,10 @@ export default function PlanetScene() {
           margin-top: 3px;
           font-size: 5px;
           letter-spacing: 0.05em;
-          color: rgba(148, 210, 255, 0.9);
+          color: rgba(148, 210, 255, 0.95);
           white-space: nowrap;
           font-family: var(--font-mono, monospace);
-          text-shadow: 0 0 5px rgba(96, 165, 250, 0.9);
+          text-shadow: 0 0 5px rgba(96, 165, 250, 1);
         }
 
         /* HUD crosshair */
@@ -321,15 +221,13 @@ export default function PlanetScene() {
         }
         .crosshair-h {
           position: absolute;
-          top: 50%;
-          left: -8px; right: -8px;
+          top: 50%; left: -8px; right: -8px;
           height: 1px;
           background: linear-gradient(90deg, transparent, rgba(56,189,248,0.2) 30%, rgba(56,189,248,0.2) 70%, transparent);
         }
         .crosshair-v {
           position: absolute;
-          left: 50%;
-          top: -8px; bottom: -8px;
+          left: 50%; top: -8px; bottom: -8px;
           width: 1px;
           background: linear-gradient(180deg, transparent, rgba(56,189,248,0.2) 30%, rgba(56,189,248,0.2) 70%, transparent);
         }
