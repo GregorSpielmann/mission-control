@@ -289,15 +289,15 @@ export default function PlanetScene() {
           border-radius: 50%;
           border: 28px solid transparent;
           background:
-            /* outer painted ring — dark gunmetal */
-            linear-gradient(135deg, #1a2233 0%, #0d1320 40%, #1a2233 100%) padding-box,
-            /* rim highlight edge */
+            /* interior: transparent so planet shows through */
+            transparent padding-box,
+            /* border face: dark gunmetal with blue-steel sheen */
             linear-gradient(135deg,
-              rgba(80,120,180,0.6) 0%,
-              rgba(30,50,80,0.2) 30%,
-              rgba(80,120,180,0.5) 60%,
-              rgba(30,50,80,0.2) 80%,
-              rgba(80,120,180,0.6) 100%
+              rgba(22,38,62,0.98) 0%,
+              rgba(8,14,26,0.98) 30%,
+              rgba(18,32,52,0.98) 55%,
+              rgba(8,14,26,0.98) 75%,
+              rgba(22,38,62,0.98) 100%
             ) border-box;
           box-shadow:
             /* outer glow */
