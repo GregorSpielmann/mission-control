@@ -8,6 +8,7 @@ import Commander from '@/components/Commander'
 import MissionLog from '@/components/MissionLog'
 import AlertPanel from '@/components/AlertPanel'
 import ResourcePipeline from '@/components/ResourcePipeline'
+import { usePipeline } from '@/hooks/usePipeline'
 
 // Decorative readout rows for side panels
 function Readout({ label, value, color = '#2563eb' }: { label: string; value: string; color?: string }) {
@@ -45,6 +46,11 @@ function VerticalLabel({ text }: { text: string }) {
 }
 
 export default function CockpitFrame() {
+  const { data: pipeline } = usePipeline()
+
+  const mrrLabel   = '€42K MRR'
+  const pipeLabel  = pipeline ? `$${(pipeline.open_value / 1000).toFixed(0)}K PIPELINE · ${pipeline.open_count} DEALS` : '— PIPELINE'
+
   return (
     <div className="fixed inset-0 z-20 flex flex-col pointer-events-none select-none">
 
@@ -180,7 +186,7 @@ export default function CockpitFrame() {
             <Readout label="AGENTS" value="6 CREW" color="#60a5fa" />
             <Readout label="UPLINK" value="STRONG" color="#22c55e" />
             <Readout label="LAT" value="12 MS" color="#22c55e" />
-            <Readout label="MRR" value="€42K" color="#4ade80" />
+            <Readout label="MRR" value={mrrLabel.split(' ')[0]} color="#4ade80" />
             <Readout label="TARGET" value="€1M" color="#f59e0b" />
           </div>
 
@@ -235,7 +241,7 @@ export default function CockpitFrame() {
           <CockpitMonitor
             label="WAR ROOM"
             icon="🎯"
-            statusText="€42K MRR"
+            statusText={mrrLabel}
             statusColor="green"
             overlayContent={
               <div className="flex flex-col gap-4">
@@ -254,7 +260,7 @@ export default function CockpitFrame() {
           <CockpitMonitor
             label="GROWTH LAB"
             icon="📊"
-            statusText="3 PIPELINES"
+            statusText={pipeline ? `${pipeline.open_count} ACTIVE DEALS` : '3 PIPELINES'}
             statusColor="purple"
             overlayContent={
               <div>
