@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mission-control",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["/Users/gregorspielmann/mission-control/node_modules/.bin/next", "dev", "--port", "3001"],
+      "port": 3001,
+      "cwd": "/Users/gregorspielmann/mission-control",
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  ]
+}
