@@ -109,13 +109,14 @@ export default function PlanetScene() {
           z-index: 1;
         }
 
-        /* Planet image — mix-blend-mode:screen makes pure black transparent */
+        /* Planet image — clip to circle, screen blend for shadow blending */
         .planet-img {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
           object-fit: contain;
+          clip-path: circle(42% at 50% 50%);
           mix-blend-mode: screen;
           user-select: none;
           pointer-events: none;
