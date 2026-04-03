@@ -132,7 +132,7 @@ export default function AgentStations() {
   }, [])
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {agents.map(agent => (
         <AgentCard key={agent.name} agent={agent} />
       ))}

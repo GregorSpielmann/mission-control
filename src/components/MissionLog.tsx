@@ -96,7 +96,7 @@ export default function MissionLog() {
   return (
     <div className="panel flex flex-col" style={{ minHeight: 0 }}>
       <div className="panel-header">◈ MISSION LOG — SHIP&apos;S RECORD</div>
-      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2" style={{ maxHeight: '280px' }}>
+      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2">
         {handovers.length === 0 ? (
           <div className="text-text-secondary text-[11px] text-center py-4">No transmissions logged.</div>
         ) : (

@@ -219,13 +219,16 @@ export default function CockpitFrame() {
             icon="🤖"
             statusText="6 AGENTS"
             statusColor="green"
-          >
-            <div>
-              <div className="text-[10px] font-bold tracking-widest text-[#64748b] mb-3 uppercase">
-                ◈ Crew Stations — Active Agents
+            overlayContent={
+              <div>
+                <div className="text-[11px] font-bold tracking-widest text-[#64748b] mb-4 uppercase">
+                  ◈ Crew Stations — Agent Fleet Status
+                </div>
+                <AgentStations />
               </div>
-              <AgentStations />
-            </div>
+            }
+          >
+            <AgentStations />
           </CockpitMonitor>
 
           {/* WAR ROOM — NorthStar + Pipelines */}
@@ -234,6 +237,12 @@ export default function CockpitFrame() {
             icon="🎯"
             statusText="€42K MRR"
             statusColor="green"
+            overlayContent={
+              <div className="flex flex-col gap-4">
+                <NorthStar />
+                <ResourcePipeline />
+              </div>
+            }
           >
             <div className="flex flex-col gap-4">
               <NorthStar />
@@ -247,13 +256,16 @@ export default function CockpitFrame() {
             icon="📊"
             statusText="3 PIPELINES"
             statusColor="purple"
-          >
-            <div>
-              <div className="text-[10px] font-bold tracking-widest text-[#64748b] mb-3 uppercase">
-                ◈ Resource Pipelines — Growth Engine
+            overlayContent={
+              <div>
+                <div className="text-[11px] font-bold tracking-widest text-[#64748b] mb-4 uppercase">
+                  ◈ Resource Pipelines — Growth Engine
+                </div>
+                <ResourcePipeline />
               </div>
-              <ResourcePipeline />
-            </div>
+            }
+          >
+            <ResourcePipeline />
           </CockpitMonitor>
 
           {/* COMMS — Full Mission Log */}
@@ -262,13 +274,16 @@ export default function CockpitFrame() {
             icon="📻"
             statusText="LIVE"
             statusColor="cyan"
-          >
-            <div>
-              <div className="text-[10px] font-bold tracking-widest text-[#64748b] mb-3 uppercase">
-                ◈ Mission Log — Ship&apos;s Record
+            overlayContent={
+              <div>
+                <div className="text-[11px] font-bold tracking-widest text-[#64748b] mb-4 uppercase">
+                  ◈ Mission Log — Full Ship&apos;s Record
+                </div>
+                <MissionLog />
               </div>
-              <MissionLog />
-            </div>
+            }
+          >
+            <MissionLog />
           </CockpitMonitor>
         </div>
       </footer>

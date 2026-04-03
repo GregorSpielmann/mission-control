@@ -61,7 +61,7 @@ export default function AlertPanel() {
         )}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2" style={{ maxHeight: '200px' }}>
+      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2">
         {!hasAlerts && (
           <div className="flex items-center justify-center gap-2 py-4">
             <span className="w-2 h-2 rounded-full bg-green-400 pulse-green inline-block" />

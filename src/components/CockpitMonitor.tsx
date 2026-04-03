@@ -10,6 +10,7 @@ interface CockpitMonitorProps {
   statusColor?: 'green' | 'amber' | 'red' | 'blue' | 'cyan' | 'purple'
   alertBlink?: boolean
   children: React.ReactNode
+  overlayContent?: React.ReactNode
   orientation?: 'horizontal' | 'vertical'
 }
 
@@ -20,6 +21,7 @@ export default function CockpitMonitor({
   statusColor = 'blue',
   alertBlink = false,
   children,
+  overlayContent,
   orientation = 'horizontal',
 }: CockpitMonitorProps) {
   const [open, setOpen] = useState(false)
@@ -125,7 +127,7 @@ export default function CockpitMonitor({
           onClick={e => { if (e.target === e.currentTarget) close() }}
         >
           <div
-            className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded border border-[#1e2a3a]"
+            className="relative w-full max-w-5xl max-h-[88vh] flex flex-col rounded border border-[#1e2a3a]"
             style={{
               background: '#0d1117',
               boxShadow: '0 0 40px rgba(37, 99, 235, 0.15), 0 0 80px rgba(37, 99, 235, 0.05)',
@@ -153,7 +155,7 @@ export default function CockpitMonitor({
 
             {/* Panel content */}
             <div className="flex-1 overflow-y-auto p-4">
-              {children}
+              {overlayContent ?? children}
             </div>
           </div>
         </div>,
