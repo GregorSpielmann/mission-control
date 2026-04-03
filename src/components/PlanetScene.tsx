@@ -109,13 +109,14 @@ export default function PlanetScene() {
           z-index: 1;
         }
 
-        /* Planet image — fills the group, black bg blends into space */
+        /* Planet image — mix-blend-mode:screen makes pure black transparent */
         .planet-img {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
           object-fit: contain;
+          mix-blend-mode: screen;
           user-select: none;
           pointer-events: none;
         }
