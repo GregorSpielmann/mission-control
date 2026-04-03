@@ -9,6 +9,8 @@ import MissionLog from '@/components/MissionLog'
 import AlertPanel from '@/components/AlertPanel'
 import ResourcePipeline from '@/components/ResourcePipeline'
 import { usePipeline } from '@/hooks/usePipeline'
+import MissionScore from '@/components/MissionScore'
+import DiscoveryCalls from '@/components/DiscoveryCalls'
 
 // Decorative readout rows for side panels
 function Readout({ label, value, color = '#2563eb' }: { label: string; value: string; color?: string }) {
@@ -237,7 +239,7 @@ export default function CockpitFrame() {
             <AgentStations />
           </CockpitMonitor>
 
-          {/* WAR ROOM — NorthStar + Pipelines */}
+          {/* WAR ROOM — Mission Score + NorthStar */}
           <CockpitMonitor
             label="WAR ROOM"
             icon="🎯"
@@ -245,33 +247,34 @@ export default function CockpitFrame() {
             statusColor="green"
             overlayContent={
               <div className="flex flex-col gap-4">
+                <MissionScore />
                 <NorthStar />
+              </div>
+            }
+          >
+            <div className="flex flex-col gap-4">
+              <MissionScore />
+              <NorthStar />
+            </div>
+          </CockpitMonitor>
+
+          {/* GROWTH LAB — Discovery Calls + Pipeline */}
+          <CockpitMonitor
+            label="GROWTH LAB"
+            icon="📊"
+            statusText={pipeline ? `${pipeline.open_count} ACTIVE DEALS` : '— DEALS'}
+            statusColor="purple"
+            overlayContent={
+              <div className="flex flex-col gap-4">
+                <DiscoveryCalls />
                 <ResourcePipeline />
               </div>
             }
           >
             <div className="flex flex-col gap-4">
-              <NorthStar />
+              <DiscoveryCalls />
               <ResourcePipeline />
             </div>
-          </CockpitMonitor>
-
-          {/* GROWTH LAB — ResourcePipeline */}
-          <CockpitMonitor
-            label="GROWTH LAB"
-            icon="📊"
-            statusText={pipeline ? `${pipeline.open_count} ACTIVE DEALS` : '3 PIPELINES'}
-            statusColor="purple"
-            overlayContent={
-              <div>
-                <div className="text-[11px] font-bold tracking-widest text-[#64748b] mb-4 uppercase">
-                  ◈ Resource Pipelines — Growth Engine
-                </div>
-                <ResourcePipeline />
-              </div>
-            }
-          >
-            <ResourcePipeline />
           </CockpitMonitor>
 
           {/* COMMS — Full Mission Log */}

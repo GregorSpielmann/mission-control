@@ -3,13 +3,37 @@
 import { useEffect, useState } from 'react'
 import { supabase, AgentThread } from '@/lib/supabase'
 
-const AGENT_META: Record<string, { icon: string; role: string; color: string }> = {
-  orchestrator:     { icon: '🎯', role: 'Strategic Ops',   color: 'blue'   },
-  sales:            { icon: '🏹', role: 'Hunter',          color: 'green'  },
-  knowledge_steward:{ icon: '🧠', role: 'Sage',            color: 'purple' },
-  assistant:        { icon: '📡', role: 'Comms',           color: 'cyan'   },
-  creative_partner: { icon: '🎨', role: 'Thinker',         color: 'amber'  },
-  lead_dev:         { icon: '🔨', role: 'Engineer',        color: 'blue'   },
+const LEVEL_NAMES = ['', 'PRIMITIVE', 'SCOUT', 'OPERATOR', 'SPECIALIST', 'COMMANDER']
+const LEVEL_COLORS = ['', '#ef4444', '#f59e0b', '#60a5fa', '#a78bfa', '#4ade80']
+
+const AGENT_META: Record<string, { icon: string; role: string; color: string; level: number; criteriaMet: number; criteriaTotal: number }> = {
+  orchestrator:     { icon: '🎯', role: 'Strategic Ops',   color: 'blue',   level: 2, criteriaMet: 3, criteriaTotal: 5 },
+  sales:            { icon: '🏹', role: 'Hunter',          color: 'green',  level: 1, criteriaMet: 0, criteriaTotal: 5 },
+  knowledge_steward:{ icon: '🧠', role: 'Sage',            color: 'purple', level: 2, criteriaMet: 4, criteriaTotal: 5 },
+  assistant:        { icon: '📡', role: 'Comms',           color: 'cyan',   level: 2, criteriaMet: 2, criteriaTotal: 5 },
+  creative_partner: { icon: '🎨', role: 'Thinker',         color: 'amber',  level: 1, criteriaMet: 1, criteriaTotal: 5 },
+  lead_dev:         { icon: '🔨', role: 'Engineer',        color: 'blue',   level: 2, criteriaMet: 3, criteriaTotal: 5 },
+}
+
+function MaturityBadge({ level, criteriaMet, criteriaTotal }: { level: number; criteriaMet: number; criteriaTotal: number }) {
+  const color = LEVEL_COLORS[level] ?? '#64748b'
+  return (
+    <div className="flex flex-col gap-1 mt-1.5 pt-1.5 border-t border-white/5">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-1">
+          <span className="text-[7px] font-bold tracking-widest" style={{ color }}>LVL {level}</span>
+          <span className="text-[7px] tracking-widest opacity-70" style={{ color }}>{LEVEL_NAMES[level]}</span>
+        </div>
+        <span className="text-[7px] text-[#334155]">{criteriaMet}/{criteriaTotal} exits met</span>
+      </div>
+      <div className="h-0.5 rounded-full bg-white/5 overflow-hidden">
+        <div
+          className="h-full rounded-full transition-all duration-700"
+          style={{ width: `${(criteriaMet / criteriaTotal) * 100}%`, background: color, boxShadow: `0 0 4px ${color}88` }}
+        />
+      </div>
+    </div>
+  )
 }
 
 const DEFAULT_AGENTS: AgentThread[] = [
@@ -96,6 +120,12 @@ function AgentCard({ agent }: { agent: AgentThread }) {
       <div className="text-[10px] text-text-secondary">
         Last contact: <span className="text-text-accent">{formatRelativeTime(agent.last_checkin)}</span>
       </div>
+
+      <MaturityBadge
+        level={meta.level ?? 1}
+        criteriaMet={meta.criteriaMet ?? 0}
+        criteriaTotal={meta.criteriaTotal ?? 5}
+      />
     </div>
   )
 }
