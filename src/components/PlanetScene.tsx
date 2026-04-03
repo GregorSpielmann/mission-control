@@ -112,11 +112,11 @@ export default function PlanetScene() {
         /* Anchor for all planet elements */
         .planet-group {
           position: absolute;
-          top: 50%;
+          top: 46%;
           left: 60%;
           transform: translate(-50%, -50%);
-          width: 62vh;
-          height: 62vh;
+          width: 54vh;
+          height: 54vh;
           z-index: 1;
         }
 
@@ -193,24 +193,24 @@ export default function PlanetScene() {
             radial-gradient(ellipse 10% 16% at 10% 72%, rgba(38, 118, 75, 0.35) 0%, transparent 65%);
         }
 
-        /* Polar ice caps */
+        /* Polar ice caps — thin bands, not glowing blobs */
         .ice-north {
           position: absolute;
-          top: -8%;
-          left: 18%;
-          width: 64%;
-          height: 28%;
+          top: 0%;
+          left: 22%;
+          width: 56%;
+          height: 14%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at 50% 72%, rgba(215, 238, 255, 0.55) 0%, transparent 68%);
+          background: radial-gradient(ellipse at 50% 80%, rgba(215, 238, 255, 0.40) 0%, transparent 70%);
         }
         .ice-south {
           position: absolute;
-          bottom: -8%;
-          left: 24%;
-          width: 52%;
-          height: 22%;
+          bottom: 0%;
+          left: 28%;
+          width: 44%;
+          height: 10%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at 50% 28%, rgba(215, 238, 255, 0.45) 0%, transparent 68%);
+          background: radial-gradient(ellipse at 50% 20%, rgba(215, 238, 255, 0.30) 0%, transparent 70%);
         }
 
         /* Terminator — day/night divide */
@@ -311,11 +311,11 @@ export default function PlanetScene() {
         /* HUD crosshair */
         .hud-crosshair {
           position: absolute;
-          top: 50%;
+          top: 46%;
           left: 60%;
           transform: translate(-50%, -50%);
-          width: 62vh;
-          height: 62vh;
+          width: 54vh;
+          height: 54vh;
           pointer-events: none;
           z-index: 11;
         }
@@ -343,8 +343,8 @@ export default function PlanetScene() {
         /* Scan readout */
         .scan-readout {
           position: absolute;
-          bottom: 22%;
-          left: calc(60% - 31vh - 10px);
+          bottom: 24%;
+          left: calc(60% - 27vh - 10px);
           transform: translateX(-100%);
           display: flex;
           flex-direction: column;
