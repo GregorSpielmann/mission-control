@@ -3,13 +3,9 @@
   "configurations": [
     {
       "name": "adasight-dev",
-      "runtimeExecutable": "/usr/local/bin/npx",
-      "runtimeArgs": ["next", "dev", "--port", "3001"],
-      "port": 3001,
+      "command": "/usr/local/bin/node /Users/gregorspielmann/mission-control/node_modules/.bin/next dev --port 3001",
       "cwd": "/Users/gregorspielmann/mission-control",
-      "env": {
-        "PATH": "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-      }
+      "port": 3001
     }
   ]
 }

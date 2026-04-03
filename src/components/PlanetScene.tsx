@@ -158,10 +158,10 @@ export default function PlanetScene() {
           border-radius: 50%;
           overflow: hidden;
           background: radial-gradient(
-            circle at 36% 32%,
-            #1d6899 0%,
-            #193d62 25%,
-            #0f2848 52%,
+            circle at 34% 38%,
+            #196090 0%,
+            #163758 28%,
+            #0e2444 54%,
             #071830 100%
           );
           box-shadow:
@@ -193,24 +193,24 @@ export default function PlanetScene() {
             radial-gradient(ellipse 10% 16% at 10% 72%, rgba(38, 118, 75, 0.35) 0%, transparent 65%);
         }
 
-        /* Polar ice caps — thin bands, not glowing blobs */
+        /* Polar ice caps — barely there */
         .ice-north {
           position: absolute;
-          top: 0%;
-          left: 22%;
-          width: 56%;
-          height: 14%;
+          top: 2%;
+          left: 28%;
+          width: 44%;
+          height: 9%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at 50% 80%, rgba(215, 238, 255, 0.40) 0%, transparent 70%);
+          background: radial-gradient(ellipse at 50% 85%, rgba(215, 238, 255, 0.22) 0%, transparent 65%);
         }
         .ice-south {
           position: absolute;
-          bottom: 0%;
-          left: 28%;
-          width: 44%;
-          height: 10%;
+          bottom: 2%;
+          left: 30%;
+          width: 40%;
+          height: 7%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at 50% 20%, rgba(215, 238, 255, 0.30) 0%, transparent 70%);
+          background: radial-gradient(ellipse at 50% 15%, rgba(215, 238, 255, 0.18) 0%, transparent 65%);
         }
 
         /* Terminator — day/night divide */
